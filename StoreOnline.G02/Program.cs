@@ -35,7 +35,7 @@ namespace StoreOnline.G02
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddAutoMapper(M =>
-            M.AddProfile(new ProductProfile()));
+            M.AddProfile(new ProductProfile(builder.Configuration)));
 
             var app = builder.Build();
            using var scope = app.Services.CreateScope();
@@ -58,6 +58,7 @@ namespace StoreOnline.G02
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
 
