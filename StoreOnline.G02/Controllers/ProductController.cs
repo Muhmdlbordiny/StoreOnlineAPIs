@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StoreCore.G02.Dto.Products;
+using StoreCore.G02.Helper;
 using StoreCore.G02.RepositriesContract;
+using StoreCore.G02.Specifications.Products;
 
 namespace StoreOnline.G02.Controllers
 {
@@ -15,9 +18,9 @@ namespace StoreOnline.G02.Controllers
             _productService = productService;
         }
         [HttpGet] //Get baseurl/api/product
-        public async Task< IActionResult> GetAllProduct() //endpoint
+        public async Task< IActionResult> GetAllProduct([FromQuery]Productspecparms productspec )
         {
-           var result=await _productService.GetAllProductAsync();
+           var result=await _productService.GetAllProductAsync( productspec);
             return Ok(result);//200
         }
         [HttpGet("brands")]
