@@ -13,7 +13,8 @@ namespace StoreCore.G02.Mapping.Basket
     {
         public BasketProfile()
         {
-            CreateMap<CustomerBasket, CustomerBasketDto>().ReverseMap();
+            CreateMap<CustomerBasket, CustomerBasketDto>().ReverseMap(); 
+            CreateMap<BasketItemDto, BasketItem>().ReverseMap();
         }
     }
 }

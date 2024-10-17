@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreCore.G02.Entites
+namespace StoreCore.G02.Dto.Basket
 {
-    public class BasketItem
+    public class BasketItemDto
     {
         public int Id { get; set; }
         public string ProductName { get; set; }
@@ -15,7 +15,5 @@ namespace StoreCore.G02.Entites
         public string Type { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
-
-
     }
 }

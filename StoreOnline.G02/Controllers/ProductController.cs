@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StoreCore.G02.Dto.Products;
 using StoreCore.G02.Helper;
 using StoreCore.G02.RepositriesContract;
 using StoreCore.G02.Specifications.Products;
+using StoreOnline.G02.Attributes;
 using StoreOnline.G02.Error;
 
 namespace StoreOnline.G02.Controllers
@@ -19,6 +21,8 @@ namespace StoreOnline.G02.Controllers
         }
         [ProducesResponseType(typeof(PaginationResponse<ProductDto>),StatusCodes.Status200OK)]
         [HttpGet] //Get baseurl/api/product
+        [Cash(100)]
+        [Authorize]
         public async Task< ActionResult<PaginationResponse<ProductDto>>> GetAllProduct([FromQuery]Productspecparms productspec )
         {
            var result=await _productService.GetAllProductAsync( productspec);
@@ -27,6 +31,8 @@ namespace StoreOnline.G02.Controllers
         [ProducesResponseType(typeof(IEnumerable<TypeBrandDto>), StatusCodes.Status200OK)]
 
         [HttpGet("brands")]
+        [Authorize]
+
         public async Task< ActionResult<IEnumerable<TypeBrandDto>>> GetAllBrands()
         {
            var result = await _productService.GetAllBrandsAsync(); 
@@ -35,6 +41,8 @@ namespace StoreOnline.G02.Controllers
         [ProducesResponseType(typeof(IEnumerable<TypeBrandDto>), StatusCodes.Status200OK)]
 
         [HttpGet("types")]
+        [Authorize]
+
         public async Task<ActionResult<IEnumerable<TypeBrandDto>>> GetAllTypes()
         {
             var result = await _productService.GetAllTypeAsync();
@@ -45,6 +53,8 @@ namespace StoreOnline.G02.Controllers
         [ProducesResponseType(typeof(IEnumerable<ApiErrorResponse>), StatusCodes.Status404NotFound)]
 
         [HttpGet("{id}")]
+        [Authorize]
+
         public async Task<IActionResult> GetProductById(int?id)
         {
             if (id is null) return BadRequest(new ApiErrorResponse(400));

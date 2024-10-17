@@ -1,4 +1,5 @@
 ﻿using StoreCore.G02.Entites;
+using StoreCore.G02.Entites.Orders;
 using StoreRepositry.G02.Data.Contexts;
 using System;
 using System.Collections.Generic;
@@ -55,6 +56,18 @@ namespace StoreRepositry.G02.Data.DataSeeds
                 if(products is not null && products.Count() > 0)
                 {
                    await _context.Products.AddRangeAsync(products);
+                    await _context.SaveChangesAsync();
+
+                }
+            }
+            if (_context.DeliveryMethods.Count() == 0)
+            {
+                var deliveryData = File.ReadAllText
+                      (@"..\StoreRepositry.G02\Data\SeedsFiles\delivery.json");
+                var deliveryMethods = JsonSerializer.Deserialize<List<DeliveryMethod>>(deliveryData);
+                if (deliveryMethods is not null && deliveryMethods.Count() > 0)
+                {
+                    await _context.DeliveryMethods.AddRangeAsync(deliveryMethods);
                     await _context.SaveChangesAsync();
 
                 }
