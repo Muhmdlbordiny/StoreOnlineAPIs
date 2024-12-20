@@ -20,6 +20,11 @@ using StoreService.G02.Services.User;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using StoreCore.G02.Mapping.Auth;
+using StoreCore.G02.Mapping.Orders;
+using StoreCore.G02.ServiceContract;
+using StoreService.G02.Services.Orders;
+using StoreCore.G02.Mapping.DeliveryMethods;
+using StoreService.G02.Services.Payments;
 
 namespace StoreOnline.G02.Helper
 {
@@ -84,6 +89,8 @@ namespace StoreOnline.G02.Helper
             services.AddScoped<ICashService,CashService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IPaymentService, PaymentService>();
             return services;
         }
         private static IServiceCollection AddAutoMapperService(this IServiceCollection services,IConfiguration configuration)
@@ -92,6 +99,8 @@ namespace StoreOnline.G02.Helper
            M.AddProfile(new ProductProfile(configuration)));
             services.AddAutoMapper(M => M.AddProfile(new BasketProfile()));
             services.AddAutoMapper(M=>M.AddProfile(new AuthoProfile()));
+            services.AddAutoMapper(M=>M.AddProfile(new OrderProfile(configuration)));
+            services.AddAutoMapper(M => M.AddProfile(new DeliveryMethodProfile()));
             return services;
         }
         private static IServiceCollection ConfigureInvaildModelStateResponse

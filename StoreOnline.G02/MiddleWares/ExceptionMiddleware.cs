@@ -16,7 +16,7 @@ namespace StoreOnline.G02.MiddleWares
             _env = env;
         }
         public async Task InvokeAsync(HttpContext context)
-        {
+         {
             try
             {
                 await _next.Invoke(context);

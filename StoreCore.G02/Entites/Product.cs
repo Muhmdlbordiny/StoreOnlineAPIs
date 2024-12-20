@@ -14,11 +14,11 @@ namespace StoreCore.G02.Entites
         public decimal Price { get; set; }
 
         public string PictureUrl { get; set; }
-        public int? TypeId { get; set; }
-        public ProductType Type { get; set; }//Fk
+        public int TypeId { get; set; }
+        public ProductType? Type { get; set; }//Fk
 
-        public int? BrandId { get; set; }//FK
-        public ProductBrand Brand { get; set; }
+        public int BrandId { get; set; }//FK
+        public ProductBrand? Brand { get; set; }
 
        
 
