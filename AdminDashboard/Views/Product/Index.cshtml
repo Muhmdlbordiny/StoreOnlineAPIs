@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ProductViewModel>
+@{
+	ViewData["Title"] = "~/Views/Product/Index";
+}
+
+
+<h1>All Products</h1>
+<a asp-controller="Product" asp-action="Create" class="btn btn-outline-primary m-2">Add New Product</a>
+@if (Model.Count() > 0)
+{
+	<div class="container">
+		<table class="table table-hover table-striped table-bordered dt-responsive nowrap">
+			<thead class="bg-dark text-white text-center">
+				<tr>
+					<th>Id</th>
+					<th>Picture</th>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Price</th>
+					<th>Brand</th>
+					<th>Type</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var p in Model)
+				{
+					<tr>
+						<td>@p.Id</td>
+						<td>
+							<img class="w-25" src="~/@p.PictureUrl" />
+						</td>
+						<td>@p.Name</td>
+						<td>@p.Description</td>
+						<td>@p.Price</td>
+						<td>@p.Brand.Name</td>
+						<td>@p.Type.Name</td>
+						<td>
+							<div class=" d-flex">
+								<a class="btn mb-2 text-warning" asp-controller="Product" asp-action="Edit" asp-route-id="@p.Id"><i class="fas fa-pen"></i> </a>
+								<a class="btn text-danger" asp-controller="Product" asp-action="Delete" asp-route-id="@p.Id"><i class="fas fa-trash"></i></a>
+							</div>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+
+}
+else
+{
+	<div class="mt-3 p-3 alert-warning">
+		<h2>There is no Products!</h2>
+	</div>
+}
+@section Scripts
+{
+	<partial name="_ValidationScriptsPartial" />
+}

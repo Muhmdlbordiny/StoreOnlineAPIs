@@ -19,7 +19,7 @@ namespace StoreRepositry.G02.Data.Configuration
                             .HasMaxLength(200).IsRequired();
             builder.Property(p => p.Description)
                 .HasColumnType("varchar(max)").IsRequired();
-            builder.Property(x => x.PictureUrl).IsRequired(true);
+            builder.Property(x => x.PictureUrl).IsRequired(false);
             builder.Property(p => p.Price)
                         .HasColumnType("decimal(18,2)");
 
@@ -31,8 +31,8 @@ namespace StoreRepositry.G02.Data.Configuration
                     .WithMany()
                     .HasForeignKey(p => p.TypeId)
                     .OnDelete(DeleteBehavior.SetNull);
-            builder.Property(p => p.BrandId).IsRequired(false);
-            builder.Property(p => p.TypeId).IsRequired(false);
+            builder.Property(p => p.BrandId).IsRequired();
+            builder.Property(p => p.TypeId).IsRequired();
         }
     }
 }
